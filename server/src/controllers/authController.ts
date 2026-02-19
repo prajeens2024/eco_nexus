@@ -51,7 +51,7 @@ export const register = async (req: AuthRequest, res: Response): Promise<void> =
             location: userLocation,
         });
 
-        const token = generateToken(user._id as string, user.role);
+        const token = generateToken(String(user._id), user.role);
 
         res.status(201).json({
             success: true,
@@ -95,7 +95,7 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
             throw new AppError('Invalid email or password', 401);
         }
 
-        const token = generateToken(user._id as string, user.role);
+        const token = generateToken(String(user._id), user.role);
 
         res.json({
             success: true,

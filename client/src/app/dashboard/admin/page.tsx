@@ -92,38 +92,41 @@ export default function AdminPage() {
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
+                        <table className="table-premium">
                             <thead>
-                                <tr className="text-left text-[var(--text-muted)] border-b border-[var(--glass-border)]">
-                                    <th className="pb-3 pr-4">User</th>
-                                    <th className="pb-3 pr-4">Email</th>
-                                    <th className="pb-3 pr-4">Role</th>
-                                    <th className="pb-3 pr-4">Company</th>
-                                    <th className="pb-3 pr-4">Reputation</th>
-                                    <th className="pb-3">Transactions</th>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Company</th>
+                                    <th>Reputation</th>
+                                    <th>Transactions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {users.map((u, i) => (
-                                    <motion.tr key={u._id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }}
-                                        className="border-b border-[var(--glass-border)] hover:bg-white/3 transition">
-                                        <td className="py-3 pr-4">
+                                    <motion.tr key={u._id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }}>
+                                        <td>
                                             <div className="flex items-center gap-2">
-                                                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style={{ background: 'var(--gradient-secondary)' }}>
+                                                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style={{ background: 'var(--gradient-secondary)' }}>
                                                     {u.name.charAt(0)}
                                                 </div>
                                                 <span className="font-medium">{u.name}</span>
                                             </div>
                                         </td>
-                                        <td className="py-3 pr-4 text-[var(--text-secondary)]">{u.email}</td>
-                                        <td className="py-3 pr-4">
-                                            <span className={`px-2 py-1 rounded-lg text-xs font-medium capitalize ${u.role === 'admin' ? 'text-[var(--accent-pink)] bg-[var(--accent-pink)]/10' : u.role === 'provider' ? 'text-[var(--accent-cyan)] bg-[var(--accent-cyan)]/10' : 'text-[var(--accent-blue)] bg-[var(--accent-blue)]/10'}`}>
+                                        <td className="text-[var(--text-secondary)]">{u.email}</td>
+                                        <td>
+                                            <span className={`chip ${u.role === 'admin' ? 'text-[#f72585] bg-[rgba(247,37,133,0.1)]' : u.role === 'provider' ? 'text-[#06d6a0] bg-[rgba(6,214,160,0.1)]' : 'text-[#4361ee] bg-[rgba(67,97,238,0.1)]'}`}>
                                                 {u.role}
                                             </span>
                                         </td>
-                                        <td className="py-3 pr-4 text-[var(--text-secondary)]">{u.company}</td>
-                                        <td className="py-3 pr-4">{u.reputation.toFixed(1)}</td>
-                                        <td className="py-3">{u.totalTransactions}</td>
+                                        <td className="text-[var(--text-secondary)]">{u.company}</td>
+                                        <td>
+                                            <span className="font-mono text-sm">{u.reputation.toFixed(1)}</span>
+                                        </td>
+                                        <td>
+                                            <span className="font-mono text-sm">{u.totalTransactions}</span>
+                                        </td>
                                     </motion.tr>
                                 ))}
                             </tbody>
